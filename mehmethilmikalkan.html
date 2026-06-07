@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehmet Hilmi Kalkan — Seyyah</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1611;
+    --parchment: #f5f0e8;
+    --sand: #e8dfc8;
+    --sea: #2a6b8a;
+    --sea-light: #4a8fa8;
+    --sea-pale: #d4e8f0;
+    --gold: #b8862a;
+    --gold-light: #d4a84b;
+    --rust: #8a3a1e;
+    --muted: #6b5d4a;
+    --border: #c8b898;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--parchment);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,240,232,0.96);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+    backdrop-filter: blur(6px);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sea);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Crimson Pro', serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sea); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 58px;
+    background: linear-gradient(160deg, #e8f0f5 0%, var(--parchment) 40%, #f0e8d8 100%);
+  }
+
+  .hero-map-bg {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Ccircle cx='300' cy='300' r='280' fill='none' stroke='%232a6b8a' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='220' fill='none' stroke='%232a6b8a' stroke-width='0.5'/%3E%3Ccircle cx='300' cy='300' r='160' fill='none' stroke='%232a6b8a' stroke-width='0.5'/%3E%3Ccircle cx='300' cy='300' r='100' fill='none' stroke='%232a6b8a' stroke-width='0.5'/%3E%3Cline x1='20' y1='300' x2='580' y2='300' stroke='%232a6b8a' stroke-width='0.5'/%3E%3Cline x1='300' y1='20' x2='300' y2='580' stroke='%232a6b8a' stroke-width='0.5'/%3E%3Cline x1='102' y1='102' x2='498' y2='498' stroke='%232a6b8a' stroke-width='0.3'/%3E%3Cline x1='498' y1='102' x2='102' y2='498' stroke='%232a6b8a' stroke-width='0.3'/%3E%3C/svg%3E");
+    background-size: 500px 500px;
+    background-repeat: repeat;
+  }
+
+  .hero-inner {
+    text-align: center;
+    position: relative;
+    max-width: 700px;
+    padding: 3rem 2rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-alias {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    color: var(--sea);
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sea);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sea-light);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+  }
+  .hero-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); opacity: 0.6;
+    animation: fadeUp 1.5s 0.5s ease both;
+  }
+  .scroll-arrow {
+    width: 18px; height: 18px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    animation: bounce 1.8s infinite;
+  }
+  @keyframes bounce { 0%, 100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(5px); } }
+
+  section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400; line-height: 1.2;
+    color: var(--ink); margin-bottom: 1.8rem;
+  }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+
+  .about-text { font-size: 17px; color: var(--muted); font-weight: 300; }
+  .about-text p { margin-bottom: 1.2rem; }
+  .about-text strong { color: var(--ink); font-weight: 400; }
+
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .tag {
+    font-size: 12px; letter-spacing: 0.06em;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--sea); color: var(--sea); }
+
+  .about-quote {
+    border-left: 2px solid var(--gold);
+    padding: 1.2rem 1.5rem;
+    background: rgba(184,134,42,0.05);
+    margin-top: 1rem;
+  }
+  .about-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .about-quote cite {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .dest-card {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+    background: white;
+    padding: 1.8rem 1.5rem 1.5rem;
+    cursor: default;
+    transition: all 0.3s;
+  }
+  .dest-card:hover {
+    border-color: var(--sea);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(42,107,138,0.1);
+  }
+  .dest-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--sea);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.3s;
+  }
+  .dest-card:hover::before { transform: scaleY(1); }
+
+  .dest-icon { font-size: 28px; margin-bottom: 1rem; display: block; }
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--ink); margin-bottom: 0.4rem;
+  }
+  .dest-desc { font-size: 14px; color: var(--muted); font-weight: 300; }
+
+  .edu-block {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--sand);
+  }
+  .edu-block:last-child { border-bottom: none; }
+  .edu-year {
+    font-size: 12px; letter-spacing: 0.1em;
+    color: var(--gold); min-width: 80px; padding-top: 3px;
+    text-transform: uppercase;
+  }
+  .edu-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 0.2rem;
+  }
+  .edu-content p { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+  #iletisim { text-align: center; padding-bottom: 6rem; }
+  #iletisim .section-label { justify-content: center; }
+  #iletisim .section-label::after,
+  #iletisim .section-label::before { display: none; }
+
+  .contact-links {
+    display: flex; justify-content: center; gap: 2rem;
+    flex-wrap: wrap; margin-top: 2rem;
+  }
+  .contact-link {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    text-decoration: none; color: var(--muted);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--sea); }
+  .contact-link-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    transition: all 0.2s;
+    color: var(--sea);
+  }
+  .contact-link:hover .contact-link-icon {
+    border-color: var(--sea);
+    background: var(--sea-pale);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12px; letter-spacing: 0.06em;
+    color: var(--muted); opacity: 0.6;
+  }
+
+  .ornament {
+    text-align: center; padding: 1rem 0;
+    color: var(--gold); opacity: 0.5;
+    font-size: 20px; letter-spacing: 1rem;
+  }
+  .full-border { border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">M. H. Kalkan</a>
+  <ul class="nav-links">
+    <li><a href="#hakkimda">Hakkımda</a></li>
+    <li><a href="#destinations">Seyahat</a></li>
+    <li><a href="#egitim">Eğitim</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-map-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Seyyah</div>
+    <h1 class="hero-name">Mehmet Hilmi<br>Kalkan</h1>
+    <p class="hero-alias">— Seyyah —</p>
+    <p class="hero-desc">
+      Eğitimci. Doğa sever. Yolculukları, denizleri ve ufukları seven biri. Tek başına yola çıkar, ama hiç yalnız değildir.
+    </p>
+    <a class="hero-cta" href="#hakkimda">Daha fazla keşfet →</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<section id="hakkimda">
+  <div class="section-label">Hakkımda</div>
+  <h2 class="section-title">Yollar biter, <em>yolculuklar bitmez.</em></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Adım <strong>Mehmet Hilmi Kalkan</strong>. Mahlasım <strong>Seyyah</strong> — çünkü yolculuk benim için bir uğraş değil, bir var oluş biçimi.</p>
+      <p>Meslekte eğitimciyim; çocukların merakını beslemek, onlara dürüstlüğü ve sorumluluğu sevdirmek en büyük amacım. Sınıfın dışında ise deniz, boğaz ve yabancı sokaklarla buluşmak beni besliyor.</p>
+      <p>Yalnız seyahat etmeyi severim. Her rota kendi içinde bir öğreti, her konaklama kendi içinde bir hikâye.</p>
+      <div class="about-tags">
+        <span class="tag">Eğitim</span>
+        <span class="tag">Doğa</span>
+        <span class="tag">Deniz</span>
+        <span class="tag">Boğaz</span>
+        <span class="tag">Avrupa</span>
+        <span class="tag">Solo Seyahat</span>
+        <span class="tag">Fotoğraf</span>
+        <span class="tag">Okuma</span>
+      </div>
+    </div>
+    <div>
+      <div class="about-quote">
+        <blockquote>
+          "Dünya büyük bir kitaptır; seyahat etmeyenler yalnızca ilk sayfayı okumuş olur."
+        </blockquote>
+        <cite>— Aziz Augustinus</cite>
+      </div>
+      <div class="about-quote" style="margin-top:1rem; border-left-color: var(--sea); background: rgba(42,107,138,0.04);">
+        <blockquote>
+          "Öğretmen, bahçıvana benzer. Tohumları eker, mevsimi gelince filizlenir."
+        </blockquote>
+        <cite>— Seyyah'ın notu</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-border"><div class="ornament">✦ ✦ ✦</div></div>
+
+<section id="destinations">
+  <div class="section-label">Seyahat</div>
+  <h2 class="section-title">Rotalar &amp; <em>İzlenimler</em></h2>
+  <div class="dest-grid">
+    <div class="dest-card">
+      <span class="dest-icon">⛵</span>
+      <div class="dest-name">Deniz Rotaları</div>
+      <p class="dest-desc">Ege ve Akdeniz kıyıları boyunca sessiz koylara, antik limanlara yolculuklar.</p>
+    </div>
+    <div class="dest-card">
+      <span class="dest-icon">🌉</span>
+      <div class="dest-name">Boğaz</div>
+      <p class="dest-desc">İki kıtayı birleştiren sular üzerinde vapur yolculukları ve sahil yürüyüşleri.</p>
+    </div>
+    <div class="dest-card">
+      <span class="dest-icon">🗺️</span>
+      <div class="dest-name">Avrupa Gezileri</div>
+      <p class="dest-desc">Kara yoluyla yapılan uzun soluklu Avrupa rotaları; tarihin ve kültürün izinden.</p>
+    </div>
+    <div class="dest-card">
+      <span class="dest-icon">🌲</span>
+      <div class="dest-name">Doğa Kaçamakları</div>
+      <p class="dest-desc">Ormanlar, yaylalar ve kamp ateşleri. Şehrin sesinden uzakta nefes almak.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-border"><div class="ornament">✦ ✦ ✦</div></div>
+
+<section id="egitim">
+  <div class="section-label">Eğitim &amp; Kariyer</div>
+  <h2 class="section-title">Bir <em>eğitimcinin</em> yolculuğu</h2>
+  <div class="edu-block">
+    <div class="edu-year">Güncel</div>
+    <div class="edu-content">
+      <h3>İlkokul Sınıf Öğretmeni</h3>
+      <p>2. Sınıf — Türkiye Yüzyılı Maarif Modeli çerçevesinde Değerler Eğitimi, matematik ve Türkçe derslerini yürütmektedir.</p>
+    </div>
+  </div>
+  <div class="edu-block">
+    <div class="edu-year">Süregelen</div>
+    <div class="edu-content">
+      <h3>Mesleki Gelişim</h3>
+      <p>Toplumsal cinsiyet eşitliği eğitimi (Mor Yaz Okulu — Sabancı Üniversitesi), dijital araçlar ile öğretim, mentörlük ve aday öğretmen danışmanlığı.</p>
+    </div>
+  </div>
+  <div class="edu-block">
+    <div class="edu-year">Misyon</div>
+    <div class="edu-content">
+      <h3>Eğitimde Değer</h3>
+      <p>Sınıftaki her çocuğun merakını canlı tutmak, dürüstlük ve empatiyi içselleştirmelerine katkıda bulunmak temel amacıdır.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-border"></div>
+
+<section id="iletisim">
+  <div class="section-label" style="justify-content:center;">İletişim</div>
+  <h2 class="section-title" style="text-align:center;">Bir <em>selam</em> gönderin</h2>
+  <p style="text-align:center; color:var(--muted); font-size:16px; max-width:380px; margin:0 auto; font-weight:300;">
+    Seyahat, eğitim ya da işbirliği için ulaşabilirsiniz.
+  </p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:mehmethilmikalkan@gmail.com">
+      <div class="contact-link-icon">✉</div>
+      E-posta
+    </a>
+    <a class="contact-link" href="https://www.facebook.com/mehmethilmikalkan" target="_blank">
+      <div class="contact-link-icon" style="font-size:18px; font-weight:700;">f</div>
+      Facebook
+    </a>
+    <a class="contact-link" href="https://www.linkedin.com/in/mehmethilmikalkan" target="_blank">
+      <div class="contact-link-icon" style="font-size:16px;">in</div>
+      LinkedIn
+    </a>
+    <a class="contact-link" href="https://www.instagram.com/mehmethilmikalkan" target="_blank">
+      <div class="contact-link-icon">📷</div>
+      Instagram
+    </a>
+    <a class="contact-link" href="https://twitter.com/mehmethilmikalkan" target="_blank">
+      <div class="contact-link-icon" style="font-size:16px;">𝕏</div>
+      Twitter / X
+    </a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Mehmet Hilmi Kalkan — Seyyah &nbsp;·&nbsp; Kırıkkale, Türkiye
+</footer>
+
+</body>
+</html>
